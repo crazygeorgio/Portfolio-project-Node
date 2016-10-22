@@ -1,17 +1,20 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-    date: {
-    	type: Date
-    },
     title: {
     	type: String,
-    	trim: true
+    	trim: true,
+    	required:true
     },
-    body: {
+	tech: {
     	type: String,
     	trim: true
-    }  
+    },
+    url: {
+    	type: String,
+    	trim: true
+    },
+    pic: {}
 });
 
-exports.Posts = mongoose.model('Posts', schema);
+exports.Works = mongoose.model('Works', schema);

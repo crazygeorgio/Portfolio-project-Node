@@ -1,17 +1,10 @@
 .slider
-	.slider__items(style="display:none;")
-		.slider__item(data-img="./assets/img/work-1.png" data-href="#1") 
-			.slider__item-title Сайт школы онлайн <br />Образования
-			.slider__item-descr HTML, CSS, JAVASCRIPT
-		.slider__item(data-img="./assets/img/work-2.png" data-href="#2") 
-			.slider__item-title Сайт школы онлайн <br />Образования
-		.slider__item(data-img="./assets/img/work-3.png" data-href="#3") 
-			.slider__item-title Сайт школы онлайн <br />Образования
-			.slider__item-descr HTML, CSS, JAVASCRIPT
-		.slider__item(data-img="./assets/img/work-4.png" data-href="#3") 
-			.slider__item-title Сайт школы онлайн <br />Образования
-			.slider__item-descr HTML, CSS, JAVASCRIPT
-
+	if works
+		each item in works
+			.slider__items
+				.slider__item(data-img=item.pic data-href=item.url) 
+					.slider__item-title= item.title
+					.slider__item-descr= item.tech
 
 	//- .slider__init-pic 
 	//- 	.slider__init-pic-item.slider__init-pic-item_hidden-no

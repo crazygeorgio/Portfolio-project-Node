@@ -60,6 +60,7 @@ router.get('/admin', function(req, res, next) {
 
     var Posts = require('../models/posts').Posts;
     var Skills = require('../models/skills').Skills;
+    var Works = require('../models/works').Works;
     var async = require('async');
 
 	async.parallel({
@@ -73,6 +74,11 @@ router.get('/admin', function(req, res, next) {
 	        	callback(null, skills);
 	        });
 	    },
+        works: function(callback) {
+            Works.find().exec(function(err, works){
+                callback(null, works);
+            });
+        },
 	}, function(err, result) {
 
     	if(err) return next(err);
@@ -80,7 +86,8 @@ router.get('/admin', function(req, res, next) {
         res.render('pages/admin', {
           pageTitle: 'Админка',
           posts: result.posts,
-          skills: result.skills
+          skills: result.skills,
+          works: result.works
         });
 
 	});
@@ -92,8 +99,13 @@ router.post('/admin/addPost', function(req, res, next) {
 
     var Posts = require('../models/posts').Posts,
     	isAjaxRequest = req.xhr,
-    	newPost = new Posts(req.body);
+    	newPost;
 
+    req.body.date = new Date(req.body.date);
+    if(req.body.date == 'Invalid Date') req.body.date = new Date();
+    
+    newPost = new Posts(req.body);
+    
     newPost.save(function(err) {
 
     	if(isAjaxRequest) {
@@ -169,6 +181,31 @@ router.post('/admin/addSkill', function(req, res, next) {
 
 });
 
+/* GET admin delete skill */
+router.get('/admin/delSkill', function(req, res, next) {
+
+    var Skills = require('../models/skills').Skills,
+        isAjaxRequest = req.xhr,
+        id = req.query.id;
+
+    Skills.findById(id, function (err, skill) {
+
+        if(err) return next(err);
+        
+        if(!skill) return res.redirect(301, '/admin');
+
+        skill.remove(function(err) {
+            if(isAjaxRequest) {
+                return err ? res.status(403).send('Ошибка при удалении умения') : res.status(200).send('Умение удалено');
+            } else {
+                return res.redirect(301, '/admin?' + (err ? 'delete=error' : 'delete=ok'));
+            }
+        });
+
+    });
+
+});
+
 /* POST admin update skills */
 router.post('/admin/updateSkills', function(req, res, next) {
 
@@ -193,6 +230,85 @@ router.post('/admin/updateSkills', function(req, res, next) {
             }
 
         });
+
+});
+
+/* POST admin update skills */
+var upload = require('../libs/multer')('pic');
+
+router.post('/admin/addWork', upload, function(req, res, next) {
+
+    var Works = require('../models/works').Works,
+        fs = require('fs'),
+        isAjaxRequest = req.xhr,
+        newWork,
+        path,
+        picUrl;
+
+    if(req.body.url.length && !req.body.url.match(/^(http:\/\/|https:\/\/)/i)) {
+        
+        req.body.url = 'http://' + req.body.url;
+
+    }
+
+    if(!req.file) {
+        if(isAjaxRequest) {
+            return res.status(403).send('Ошибка при добавлении работы');
+        } else {
+            res.redirect(301, '/admin?add=error');
+        }   
+    }
+
+    path = req.file.path;
+
+    picUrl = '/' + req.file.path.split('\\').slice(1).join('/');
+
+    req.body.pic = {
+        url: picUrl,
+        path: path
+    };
+
+    newWork = new Works(req.body);
+
+    newWork.save(function(err) {
+
+        if(err) fs.unlinkSync(path);
+
+        if(isAjaxRequest) {
+            return err ? res.status(403).send('Ошибка при добавлении работы') : res.status(200).send('Работа добавлена');
+        } else {
+            res.redirect(301, '/admin?' + (err ? 'add=error' : 'add=ok'));
+        }
+
+    });
+
+});
+
+/* GET admin delete work  */
+router.get('/admin/delWork', function(req, res, next) {
+
+    var Works = require('../models/works').Works,
+        fs = require('fs'),
+        isAjaxRequest = req.xhr,
+        id = req.query.id;
+
+    Works.findById(id, function (err, work) {
+
+        if(err) return next(err);
+        
+        if(!work) return res.redirect(301, '/admin');
+
+        fs.unlinkSync(work.pic.path);
+
+        work.remove(function(err) {
+            if(isAjaxRequest) {
+                return err ? res.status(403).send('Ошибка при удалении работы') : res.status(200).send('Работа удалена');
+            } else {
+                return res.redirect(301, '/admin?' + (err ? 'delete=error' : 'delete=ok'));
+            }
+        });
+
+    });
 
 });
 

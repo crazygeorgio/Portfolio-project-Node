@@ -79,16 +79,23 @@
 			h3.page__subtitle Добавить работу
 			.row
 				.row__col.row__col_w50.row__col_with-margin
-					form.form(action="/admin/addWork" method="post")
+					form.form(action="/admin/addWork" method="post" enctype="multipart/form-data")
 						label.form__row
 							input.str-field.str-field_full-width(name="title" placeholder="Название")
 						label.form__row
 							input.str-field.str-field_full-width(name="tech" placeholder="Технологии")
 						label.form__row
-							input.str-field.str-field_full-width(name="descr" placeholder="Описание")
+							input.str-field.str-field_full-width(name="url" placeholder="Адрес сайта")
 						label.form__row
 							input.file-field(type="file" name="pic" placeholder="Текст записи")
 						.form__btn
 							button.btn Добавить работу
 				.row__col.row__col_w50.row__col_with-margin
-					if posts
+					if works
+						ul.items
+							each item, id in works
+								li.items__item
+									span.items__item-btns
+										a.btn.btn_small.items__item-btn(href="/admin/delWork?id=" + item.id title="") Удалить
+									a.items__item-name(href=item.pic.url title=item.title target="_blank")=item.title
+									span.items__item-descr= item.tech

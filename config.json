@@ -7,5 +7,9 @@
 		"name" : "myapp",
 		"options" : {},
 		"debug" : true
+	},
+	"uploads" : {
+		"dir" : "./public/uploads",
+		"picTypes" : ["image/gif", "image/jpeg", "image/pjpeg", "image/png"]
 	}
 }

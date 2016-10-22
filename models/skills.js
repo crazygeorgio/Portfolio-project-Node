@@ -1,7 +1,10 @@
 var mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
-    title: String,
+    title: {
+        type: String,
+        trim: true
+    },
     value: { 
     	type: Number, 
     	min: 0, 
@@ -9,7 +12,10 @@ var schema = new mongoose.Schema({
     	get: v => Math.round(v),
     	set: v => Math.round(v) 
     },
-    category: String
+    category: {
+        type: String,
+        trim: true
+    }
 });
 
 exports.Skills = mongoose.model('Skills', schema);
