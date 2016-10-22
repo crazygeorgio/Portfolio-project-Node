@@ -1,0 +1,15 @@
+extends ../admin
+
+block content	
+	.page.page_full-scr.page_full-light
+
+		header.page__header
+			.page__header-left 
+				h1.page__header-title Панель администрирования
+			.page__header-right
+				a.page__header-back-link(href="/index.html" title="Вернуться на сайт") Вернуться на сайт
+
+		main.page__main
+			include ../admin/blocks/tabs/tabs
+
+	include ../blocks/preloader/preloader

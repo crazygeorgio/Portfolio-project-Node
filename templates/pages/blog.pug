@@ -1,0 +1,41 @@
+extends ../main
+
+block variables
+	- var title = 'Мои работы'
+
+block content	
+	.page.page_full-height
+		header.page__header
+			.page__header-social
+				include ../blocks/social/social_white
+			.page__header-nav
+				include ../blocks/nav/nav
+
+			.page__header-wrap
+				.page__header-profile
+					include ../blocks/profile/profile_without-name
+				.page__header-page-title
+					.title.title_with-line.title_big Блог
+						.title__bg-img.title__bg-img_big.title__bg-img_white
+							+svg("blog_header","svg-bg")
+					.page__header-descr Статьи, которые я написал
+
+		main.page__main.section
+			include ../blocks/blog/blog
+
+		footer.page__footer
+			.page__footer-sect.page__footer-sect_bg-gray.page__footer-sect_clear
+				.page__footer-sect-wrap.row
+					.row__col.row__col_w33.page__footer-col 
+						.about-site Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. 
+					.row__col.row__col_w33.page__footer-col 
+						include ../blocks/simple-nav/simple-nav
+						include ../blocks/social/social_hover-white
+					.row__col.row__col_w33.page__footer-col.quote
+						.quote__text Всегда пишите код так, будто сопровождать его будет склонный к насилию психопат, который знает, где вы живете.
+						.quote__author — Martin Golding
+
+			.page__footer-sect.page__footer-sect_bg-green.page__footer-sect_clear
+				include ../blocks/copyright/copyright_light
+				
+	include ../blocks/preloader/preloader

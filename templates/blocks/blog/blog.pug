@@ -1,0 +1,16 @@
+.blog
+	button.blog__nav-button
+	.blog__nav
+		if posts
+			ul.blog__nav-list
+				each item, id in posts
+					li.blog__nav-item
+						a.blog__nav-item-lnk(href="#post"+(id+1) title=item.title)=item.title
+	if posts
+		.blog__list
+			each item, id in posts
+				.blog__item(id="post"+(id+1))
+					.blog__item-name=item.title
+					if moment
+						.blog__item-date #{moment(item.date).format("LL")}
+					.blog__item-text=item.body

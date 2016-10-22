@@ -1,0 +1,7 @@
+ul.items
+	each item, id in posts
+		li.items__item
+			span.items__item-btns
+				a.btn.btn_small.items__item-btn(href="/admin/delPost?id=" + item.id title="") Удалить
+				//- a.btn.btn_small.blog-posts__item-btn(href="" title="") Изменить
+			a.items__item-lnk(href="#post"+(id+1) title=item.title)=item.title

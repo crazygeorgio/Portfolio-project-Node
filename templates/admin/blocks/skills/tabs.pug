@@ -1,0 +1,57 @@
+tabs
+	ul.tabs__btns
+		li.tabs__btns-item
+			a.tabs__btns-item-lnk.tabs__btns-item-lnk_active(href="#tab1") TAB1
+		li.tabs__btns-item
+			a.tabs__btns-item-lnk(href="#tab2") TAB2
+		li.tabs__btns-item
+			a.tabs__btns-item-lnk(href="#tab3") TAB3
+		li.tabs__btns-item
+			a.tabs__btns-item-lnk(href="#tab4") TAB4
+	.tabs__content
+		.tabs__content-item(id="tab1")
+			h2.page__title Страница «Блог»
+			h3.page__subtitle Добавить запись
+			.row
+				.row__col.row__col_w50.row__col_with-margin
+					form.form(action="/admin/addPost" method="post")
+						label.form__row
+							input.str-field.str-field_full-width(name="title" placeholder="Название")
+						label.form__row
+							input.str-field.str-field_full-width(name="date" placeholder="Дата")
+						label.form__row
+							textarea.text-field.text-field_full-width(name="body" placeholder="Текст записи")
+						.form__btn
+							button.btn Добавить запись
+				.row__col.row__col_w50.row__col_with-margin
+					if posts
+						include ../blog-posts/blog-posts
+
+	.tabs__content
+		.tabs__content-item(id="tab2")
+			h2.page__title Страница «Обо мне
+			form.skills
+				.skills__category
+					.skills__category-title Frontend
+					.skills__category-list
+						.skills__item 
+							.skills__item-name Html
+							.skills__item-name
+								input.str-field.str-field_mini(name="value")
+							span.skills__item-percent %
+						.skills__item 
+							.skills__item-name Html
+							.skills__item-name
+								input.str-field.str-field_mini(name="value")
+							span.skills__item-percent %
+						.skills__item 
+							.skills__item-name Html
+							.skills__item-name
+								input.str-field.str-field_mini(name="value")
+							span.skills__item-percent %
+
+	.tabs__content
+		.tabs__content-item(id="tab3")
+	.tabs__content
+		.tabs__content-item(id="tab4")
+

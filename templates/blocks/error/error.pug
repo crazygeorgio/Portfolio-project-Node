@@ -1,0 +1,8 @@
+block variables
+
+.error
+   .error__title 
+      .title.title_big.title_with-line= (status ? status : 'Статус ошибки неизвестен')
+   .error__descr= (message ? message : 'описание ошибки')
+   .error__descr
+      a.error__back-link(href="./index.html" title="Вернуться на главную") Вернуться на главную

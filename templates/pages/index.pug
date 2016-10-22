@@ -1,0 +1,15 @@
+extends ../main
+
+block content	
+	.page.page_full-scr
+		header.page__header.page__header_no-bg
+			span.page__btn-auth.flipper-trigger.flipper-trigger_back(data-flip-id="main")
+				a.btn.btn_clear.btn_wide(href="#auth" title="" nofollow="") Авторизоваться
+
+		main.page__main
+			include ../blocks/page/page__flipper
+		
+		footer.page__footer
+			include ../blocks/copyright/copyright
+			
+	include ../blocks/preloader/preloader
