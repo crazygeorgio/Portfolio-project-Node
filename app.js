@@ -14,8 +14,8 @@ var app = express();
 
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.set('debug', config.get('mongoose:debug'));
 mongoose.connect(config.get('mongoose:connection') + config.get('mongoose:name'), config.get('mongoose:options'));
+mongoose.set('debug', config.get('mongoose:debug'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'templates'));

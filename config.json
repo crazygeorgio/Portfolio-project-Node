@@ -6,6 +6,6 @@
 		"connection" : "mongodb://localhost/",
 		"name" : "myapp",
 		"options" : {},
-		"debug" : false
+		"debug" : true
 	}
 }
