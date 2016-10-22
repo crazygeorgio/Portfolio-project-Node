@@ -1,0 +1,11 @@
+{
+	"express" : {
+		"port" : 3030
+	},
+	"mongoose" : {
+		"connection" : "mongodb://localhost/",
+		"name" : "myapp",
+		"options" : {},
+		"debug" : false
+	}
+}

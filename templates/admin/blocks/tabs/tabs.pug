@@ -25,76 +25,54 @@
 							button.btn Добавить запись
 				.row__col.row__col_w50.row__col_with-margin
 					if posts
-						include ../items/items
+						ul.items
+							each item, id in posts
+								li.items__item
+									span.items__item-btns
+										a.btn.btn_small.items__item-btn(href="/admin/delPost?id=" + item.id title="") Удалить
+									a.items__item-name(href="#post"+(id+1) title=item.title)=item.title
 
 		.tabs__content-item(id="tab2")
 			h2.page__title Страница «Обо мне
 			form.skills.form(action="/admin/updateSkills" method="post")
-				.skills__category
-					.skills__category-title Frontend
-					label.skills__item 
-						span.skills__item-name Html
-						span.skills__item-val
-							input.str-field.str-field_mini.str-field_full-width(name="value")
-						span.skills__item-percent %
-					label.skills__item 
-						span.skills__item-name Html
-						span.skills__item-val
-							input.str-field.str-field_mini.str-field_full-width(name="value")
-						span.skills__item-percent %
-					label.skills__item 
-						span.skills__item-name Html
-						span.skills__item-val
-							input.str-field.str-field_mini.str-field_full-width(name="value")
-						span.skills__item-percent %
-				.skills__category
-					.skills__category-title Frontend
-					label.skills__item 
-						span.skills__item-name Html
-						span.skills__item-val
-							input.str-field.str-field_mini.str-field_full-width(name="value")
-						span.skills__item-percent %
-					label.skills__item 
-						span.skills__item-name Html
-						span.skills__item-val
-							input.str-field.str-field_mini.str-field_full-width(name="value")
-						span.skills__item-percent %
-					label.skills__item 
-						span.skills__item-name Html
-						span.skills__item-val
-							input.str-field.str-field_mini.str-field_full-width(name="value")
-						span.skills__item-percent %
-				.skills__category
-					.skills__category-title Frontend
-					label.skills__item 
-						span.skills__item-name Html
-						span.skills__item-val
-							input.str-field.str-field_mini.str-field_full-width(name="value")
-						span.skills__item-percent %
-					label.skills__item 
-						span.skills__item-name Html
-						span.skills__item-val
-							input.str-field.str-field_mini.str-field_full-width(name="value")
-						span.skills__item-percent %
-					label.skills__item 
-						span.skills__item-name Html
-						span.skills__item-val
-							input.str-field.str-field_mini.str-field_full-width(name="value")
-						span.skills__item-percent %
+				if skills
+					each category, c in ['Frontend', 'Workflow', 'Backend', 'CMS']	
+						.skills__category
+							.skills__category-title=category
+							each skill, s in skills
+								if category.toLowerCase() == skill.category.toLowerCase()
+									label.skills__item 
+										span.skills__item-name=skill.title
+										span.skills__item-val
+											input.str-field.str-field_mini.str-field_full-width(name="skill[" + skill._id + "]" value=skill.value)
+										span.skills__item-percent %
 				.form__btn.skills__btn
 					button.btn Сохранить
 
 		.tabs__content-item(id="tab3")
-			h2.page__title Добавление умений
-			form.form(action="/admin/addSkill" method="post")
-				label.form__row
-					input.str-field.str-field_full-width(name="title" placeholder="Название")
-				label.form__row
-					input.str-field.str-field_full-width(name="category" placeholder="Категория")
-				label.form__row
-					input.str-field.str-field_full-width(name="value" placeholder="Уровень в процентах")
-				.form__btn
-					button.btn Добавить умение
+			h2.page__title Добавить умение
+			.row
+				.row__col.row__col_w50.row__col_with-margin
+					form.form(action="/admin/addSkill" method="post")
+						label.form__row
+							input.str-field.str-field_full-width(name="title" placeholder="Название")
+						label.form__row
+							input.str-field.str-field_full-width(name="category" placeholder="Категория")
+						label.form__row
+							input.str-field.str-field_full-width(name="value" placeholder="Уровень в процентах")
+						.form__btn
+							button.btn Добавить умение
+
+				.row__col.row__col_w50.row__col_with-margin
+					if skills
+						ul.items
+							each item, id in skills
+								li.items__item
+									span.items__item-btns
+										a.btn.btn_small.items__item-btn(href="/admin/delSkill?id=" + item.id title="") Удалить
+									.items__item-name= item.title
+										span.items__item-descr= item.category
+										span.items__item-descr #{item.value}%
 
 		.tabs__content-item(id="tab4")
 			h2.page__title Страница «Мои работы»
@@ -114,4 +92,3 @@
 							button.btn Добавить работу
 				.row__col.row__col_w50.row__col_with-margin
 					if posts
-						include ../items/items

@@ -39,63 +39,17 @@ block content
 						h2.title.title_with-line.title_with-line-upper Чем я могу быть <br /> вам полезен
 					.skills__descr 
 						p Больше всего меня привлекет Frontend разработка, но я также знаком и могу решать не сложные задачи на Backend. Но давайте по порядку.
-					.skills__dir
-						.skills__dir-title Frontend
-						ul.skills__dir-list
-							li.skills__dir-item(data-name="HTML5")
-								svg(class="skill-graph" stroke-dasharray="66 100" viewBox="0 0 38.2 38.2")
-									circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
-									circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
-							li.skills__dir-item(data-name="HTML5")
-								svg(class="skill-graph" stroke-dasharray="66 100" viewBox="0 0 38.2 38.2")
-									circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
-									circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
-							li.skills__dir-item(data-name="HTML5")
-								svg(class="skill-graph" stroke-dasharray="66 100" viewBox="0 0 38.2 38.2")
-									circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
-									circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
-							li.skills__dir-item(data-name="HTML5")
-								svg(class="skill-graph" stroke-dasharray="66 100" viewBox="0 0 38.2 38.2")
-									circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
-									circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
-					.skills__dir
-						.skills__dir-title Frontend
-						ul.skills__dir-list
-							li.skills__dir-item(data-name="HTML5")
-								svg(class="skill-graph" stroke-dasharray="66 100" viewBox="0 0 38.2 38.2")
-									circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
-									circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
-							li.skills__dir-item(data-name="HTML5")
-								svg(class="skill-graph" stroke-dasharray="66 100" viewBox="0 0 38.2 38.2")
-									circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
-									circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
-							li.skills__dir-item(data-name="HTML5")
-								svg(class="skill-graph" stroke-dasharray="66 100" viewBox="0 0 38.2 38.2")
-									circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
-									circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
-							li.skills__dir-item(data-name="HTML5")
-								svg(class="skill-graph" stroke-dasharray="66 100" viewBox="0 0 38.2 38.2")
-									circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
-									circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
-					.skills__dir
-						.skills__dir-title Frontend
-						ul.skills__dir-list
-							li.skills__dir-item(data-name="HTML5")
-								svg(class="skill-graph" stroke-dasharray="66 100" viewBox="0 0 38.2 38.2")
-									circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
-									circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
-							li.skills__dir-item(data-name="HTML5")
-								svg(class="skill-graph" stroke-dasharray="66 100" viewBox="0 0 38.2 38.2")
-									circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
-									circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
-							li.skills__dir-item(data-name="HTML5")
-								svg(class="skill-graph" stroke-dasharray="66 100" viewBox="0 0 38.2 38.2")
-									circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
-									circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
-							li.skills__dir-item(data-name="HTML5")
-								svg(class="skill-graph" stroke-dasharray="66 100" viewBox="0 0 38.2 38.2")
-									circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
-									circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
+					if skills
+						each category in ['Frontend', 'Workflow', 'Backend', 'CMS']
+							.skills__dir
+								.skills__dir-title= category
+								ul.skills__dir-list
+									each skill in skills
+										if category.toLowerCase() == skill.category.toLowerCase()
+											li.skills__dir-item(data-name=skill.title)
+												svg(class="skill-graph" stroke-dasharray=skill.value+" 100" viewBox="0 0 38.2 38.2")
+													circle(class="skill-graph__full" r="15.91" cx="19.1" cy="19.1")
+													circle(class="skill-graph__part" r="15.91" cx="19.1" cy="19.1")
 
 		footer.page__footer
 			.page__footer-bg

@@ -1,7 +1,6 @@
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+var mongoose = require('mongoose');
 
-var schema = new Schema({
+var schema = new mongoose.Schema({
     date: {
     	type: Date,
     	default: new Date()

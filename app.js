@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var fs = require('fs');
+var config = require('./libs/config');
 
 var routes = require('./routes/main');
 //var users = require('./routes/users');
@@ -13,7 +14,8 @@ var app = express();
 
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/myapp');
+mongoose.set('debug', config.get('mongoose:debug'));
+mongoose.connect(config.get('mongoose:connection') + config.get('mongoose:name'), config.get('mongoose:options'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'templates'));
