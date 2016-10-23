@@ -105,7 +105,7 @@ router.post('/admin/addPost', function(req, res, next) {
     if(req.body.date == 'Invalid Date') req.body.date = new Date();
     
     newPost = new Posts(req.body);
-    
+
     newPost.save(function(err) {
 
     	if(isAjaxRequest) {
@@ -272,7 +272,7 @@ router.post('/admin/addWork', upload, function(req, res, next) {
 
     newWork.save(function(err) {
 
-        if(err) fs.unlinkSync(path);
+        if(err) fs.unlink(path);
 
         if(isAjaxRequest) {
             return err ? res.status(403).send('Ошибка при добавлении работы') : res.status(200).send('Работа добавлена');
@@ -298,7 +298,7 @@ router.get('/admin/delWork', function(req, res, next) {
         
         if(!work) return res.redirect(301, '/admin');
 
-        fs.unlinkSync(work.pic.path);
+        fs.unlink(work.pic.path);
 
         work.remove(function(err) {
             if(isAjaxRequest) {
