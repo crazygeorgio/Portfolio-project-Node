@@ -13,4 +13,4 @@
 					.blog__item-name=item.title
 					if moment
 						.blog__item-date #{moment(item.date).format("LL")}
-					.blog__item-text=item.body
+					.blog__item-text!=item.body

@@ -233,7 +233,7 @@ router.post('/admin/updateSkills', function(req, res, next) {
 
 });
 
-/* POST admin update skills */
+/* POST admin add work */
 var upload = require('../libs/multer')('pic');
 
 router.post('/admin/addWork', upload, function(req, res, next) {
