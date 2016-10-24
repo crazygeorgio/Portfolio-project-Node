@@ -3,7 +3,7 @@
 		"port" : 3030
 	},
 	"mongoose" : {
-		"connection" : "mongodb://localhost/",
+		"connection" : "mongodb://crazygeorgio:zalman@ds061196.mlab.com:61196/",
 		"name" : "myapp",
 		"options" : {},
 		"debug" : true

@@ -1,14 +1,14 @@
-form.form(action="#" method="get")
+form.form.ajax-form(action="#" method="get")
 	.form__wrap-blur
 	.form__body
 		.form__title.form__title_green
 			.title.title_with-line.title_with-line-upper Связаться со мной
 		label.form__row
-			input.str-field.str-field_full-width.str-field_bg-opacity(type="text" value="" placeholder="Ваше имя" name="name")
+			input.str-field.str-field_full-width.str-field_bg-opacity(type="text" value="" placeholder="Ваше имя" name="name" required="")
 		label.form__row
-			input.str-field.str-field_full-width.str-field_bg-opacity(type="email" value="" placeholder="Ваш email" name="email")
+			input.str-field.str-field_full-width.str-field_bg-opacity(type="email" value="" placeholder="Ваш email" name="email" required="" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
 		label.form__row
-			textarea.text-field.text-field_fixed.text-field_full-width.text-field_bg-opacity(placeholder="Ваше сообщение" name="message")
+			textarea.text-field.text-field_fixed.text-field_full-width.text-field_bg-opacity(placeholder="Ваше сообщение" name="message" required="")
 
 	.form__btns
-		include ../btns/btns-form-contacts			
+		include ../btns/btns-form-contacts

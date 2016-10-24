@@ -32,7 +32,18 @@ router.get('/about', function(req, res, next) {
 
 /* GET works page */
 router.get('/works', function(req, res, next) {
-	res.render('pages/works', { pageTitle: 'Портфолио' });
+
+    var Works = require('../models/works').Works;
+    Works.find().exec(function(err, works){
+
+        if(err) return next(err);
+
+        res.render('pages/works', {
+          pageTitle: 'Портфолио',
+          works: works
+        });
+
+    });   
 });
 
 /* GET blog page */
