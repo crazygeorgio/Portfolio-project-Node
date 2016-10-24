@@ -2,8 +2,8 @@ block variables
 - var svg = "./assets/img/sprite.svg" 
 - var config = {defaultTitle : 'Да ладно, и так тоже работает?'}
 
-mixin svg(name, type = "svg-icon")
-    svg(role="img" class= type + " " + type + "_" + name)
+mixin svg(name, type)
+    svg(role="img" class= (type ? type : "svg-icon") + " " + (type ? type : "svg-icon") + "_" + name)
         use(xlink:href=svg + "#" + name)
 
 doctype html
