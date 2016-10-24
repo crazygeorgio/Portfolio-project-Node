@@ -254,7 +254,8 @@ router.post('/admin/addWork', upload, function(req, res, next) {
         isAjaxRequest = req.xhr,
         newWork,
         path,
-        picUrl;
+        picUrl,
+        delimiter;
 
     if(req.body.url.length && !req.body.url.match(/^(http:\/\/|https:\/\/)/i)) {
         
@@ -272,7 +273,9 @@ router.post('/admin/addWork', upload, function(req, res, next) {
 
     path = req.file.path;
 
-    picUrl = '/' + req.file.path.split('\\').slice(1).join('/');
+    delimiter = (req.file.path.indexOf('\\') + 1 ? '\\' : '/');
+
+    picUrl = '/' + req.file.path.split(delimiter).slice(1).join('/');
 
     req.body.pic = {
         url: picUrl,
@@ -309,7 +312,9 @@ router.get('/admin/delWork', function(req, res, next) {
         
         if(!work) return res.redirect(301, '/admin');
 
-        fs.unlink(work.pic.path);
+        fs.access(work.pic.path, function (err) {
+            if(!err) fs.unlink(work.pic.path);
+        });
 
         work.remove(function(err) {
             if(isAjaxRequest) {
